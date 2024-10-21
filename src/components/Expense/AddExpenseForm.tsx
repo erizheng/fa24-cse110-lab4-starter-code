@@ -22,8 +22,8 @@ const AddExpenseForm = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Exercise: Add add new expense to expenses context array
-      exp.setExpenses((prevexp.expenses => [...prevexp.expenses, {...exp.expenses, id:{name}, name:{name}, cost:{cost}}]));
-      favProps.LSet((prevL) => [...prevL, favProps.title]);
+      //exp.setExpenses(({...exp.expenses, id:{name}, name:{name} , cost:{cost}}));
+
       
   };
 
