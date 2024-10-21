@@ -42,6 +42,7 @@ const AddExpenseForm = () => {
           <label htmlFor="name">Name</label>
           <input
             required
+            placeholder="Expense Name"
             type="text"
             className="form-control"
             id="name"
@@ -55,6 +56,7 @@ const AddExpenseForm = () => {
           <label htmlFor="cost">Cost</label>
           <input
             required
+            placeholder="Expense Cost"
             type="text"
             className="form-control"
             id="cost"
