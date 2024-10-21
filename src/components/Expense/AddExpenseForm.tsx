@@ -9,7 +9,7 @@ const AddExpenseForm = () => {
   const exp = useContext(AppContext);
 
   // Exercise: Create name and cost to state variables
-  const [name, setN] = useState("");
+  const [name, setN] = useState("" as string);
   const [cost, setC] = useState(0);
 
   const ExpenseHandler = (event: React.FormEvent) => {
@@ -18,10 +18,12 @@ const AddExpenseForm = () => {
     setC(cost);
   };
 
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Exercise: Add add new expense to expenses context array
-      <ExpenseList/>
+      exp.setExpenses((prevexp.expenses => [...prevexp.expenses, {...exp.expenses, id:{name}, name:{name}, cost:{cost}}]));
+      favProps.LSet((prevL) => [...prevL, favProps.title]);
       
   };
 
