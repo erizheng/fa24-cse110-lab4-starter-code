@@ -1,15 +1,14 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
-import ExpenseList from "./ExpenseList"
 import { Expense } from "../../types/types";
 
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
-  const exp = useContext(AppContext);
+  const {expenses, setExpenses} = useContext(AppContext);
 
   // Exercise: Create name and cost to state variables
-  const [name, setN] = useState("" as string);
+  const [name, setN] = useState("");
   const [cost, setC] = useState(0);
 
   const ExpenseHandler = (event: React.FormEvent) => {
@@ -22,9 +21,16 @@ const AddExpenseForm = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Exercise: Add add new expense to expenses context array
-      //exp.setExpenses(({...exp.expenses, id:{name}, name:{name} , cost:{cost}}));
 
-      
+    const curExp: Expense = {
+      id: expenses.length.toString(),
+      name: name,
+      cost: cost,
+    }
+      setExpenses(prevExpenses => [...prevExpenses, curExp]);
+
+      setN('');
+      setC(0);
   };
 
   
