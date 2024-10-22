@@ -154,8 +154,52 @@ describe("Expense Delete", () => {
     });
 
 });
-// describe("Expense Budget Balance Verification", () => {
+describe("Expense Budget Balance Verification", () => {
+    test('total Spend and remainding updates', () => {
+        render(<App />);
 
-// });
+        //get buttons and fields
+        const saveButton = screen.getByRole('button');
+        const nameBox = screen.getByTestId('ExpenseN');
+        const costBox = screen.getByTestId('ExpenseC');
+
+        const spent = screen.getByTestId('Spending');
+        const remain = screen.getByTestId('Remainder');
+
+        //adds 3 expenses to the expenses list
+        fireEvent.change(nameBox, { target: { value: "Expense 1" } });
+        fireEvent.change(costBox, { target: { value: 50 } });
+        fireEvent.click(saveButton);
+
+        const s = parseFloat(spent.innerHTML.match(/(\d+)/)![0]);
+        const r = parseFloat(remain.innerHTML.match(/(\d+)/)![0]);
+        expect(s+r).toBe(parseFloat("1000")),
+        
+
+        fireEvent.change(nameBox, { target: { value: "Expense 2" } });
+        fireEvent.change(costBox, { target: { value: 500 } });
+        fireEvent.click(saveButton);
+        const xButton2 = screen.getByTestId('Expense 2');
+
+        const s2 = parseFloat(spent.innerHTML.match(/(\d+)/)![0]);
+        const r2 = parseFloat(remain.innerHTML.match(/(\d+)/)![0]);
+        expect(s2+r2).toBe(parseFloat("1000")),
+
+        fireEvent.change(nameBox, { target: { value: "Expense 3" } });
+        fireEvent.change(costBox, { target: { value: 33 } });
+        fireEvent.click(saveButton);
+
+        const s3 = parseFloat(spent.innerHTML.match(/(\d+)/)![0]);
+        const r3 = parseFloat(remain.innerHTML.match(/(\d+)/)![0]);
+        expect(s3+r3).toBe(parseFloat("1000")),
+
+        //delete exp2
+        fireEvent.click(xButton2);
+
+        const s4 = parseFloat(spent.innerHTML.match(/(\d+)/)![0]);
+        const r4 = parseFloat(remain.innerHTML.match(/(\d+)/)![0]);
+        expect(s4+r4).toBe(parseFloat("1000"));
+    });
+});
 
 
