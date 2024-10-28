@@ -10,8 +10,8 @@ const ExpenseItem = (currentExpense: Expense) => {
 
   const handleDeleteExpense = (currentExpense: Expense) => {
     // Exercise: Remove expense from expenses context array
-    // setExpenses(preExpenses => preExpenses.filter(i => i.id !== currentExpense.id))
-    deleteExpense(currentExpense.id)
+    deleteExpense(currentExpense.id);
+    setExpenses(preExpenses => preExpenses.filter(i => i.id !== currentExpense.id))
   };
 
   return (

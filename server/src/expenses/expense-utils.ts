@@ -22,14 +22,16 @@ export function deleteExpense(req: Request, res: Response, expenses: Expense[]) 
     // TO DO: Implement deleteExpense function
     const { id, cost, description } = req.body;
 
-    const newExpense: Expense = {
+    const curExpense: Expense = {
         id: id,
         description,
         cost,
     };
 
-    expenses.filter(i => i.id !== newExpense.id)
-    res.status(201).send(newExpense);
+    const index = expenses.findIndex((expense) => expense.id == id);
+
+    expenses.splice(index);
+    res.status(200).send(expenses);
 }
 
 export function getExpenses(req: Request, res: Response, expenses: Expense[]) {
