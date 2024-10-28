@@ -16,6 +16,8 @@ const AddExpenseForm = () => {
     event.preventDefault();
     setN(name);
     setC(cost);
+
+    //hi
   };
 
 
