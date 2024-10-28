@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Expense } from "../../types/types";
+import { createExpense } from "../../utils/expense-utils";
 
 
 const AddExpenseForm = () => {
@@ -24,9 +25,10 @@ const AddExpenseForm = () => {
 
     const curExp: Expense = {
       id: expenses.length.toString(),
-      name: name,
+      description: name,
       cost: cost,
     }
+    createExpense(curExp);
       setExpenses(prevExpenses => [...prevExpenses, curExp]);
 
       setN('');
