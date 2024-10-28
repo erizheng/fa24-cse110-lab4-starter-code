@@ -20,6 +20,16 @@ export function createExpenseServer(req: Request, res: Response, expenses: Expen
 
 export function deleteExpense(req: Request, res: Response, expenses: Expense[]) {
     // TO DO: Implement deleteExpense function
+    const { id, cost, description } = req.body;
+
+    const newExpense: Expense = {
+        id: id,
+        description,
+        cost,
+    };
+
+    expenses.filter(i => i.id !== newExpense.id)
+    res.status(201).send(newExpense);
 }
 
 export function getExpenses(req: Request, res: Response, expenses: Expense[]) {
