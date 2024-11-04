@@ -1,10 +1,12 @@
-import { useContext, useEffect } from "react";
-import { AppContext } from "../../context/AppContext";
+import { useContext, useEffect, useState } from "react";
+import { AppContext} from "../../context/AppContext";
 import { fetchBudget, updateBudget } from "../../utils/budget-utils";
 
 
 const Budget = () => {
   const { budget, setBudget } = useContext(AppContext);
+
+  const [ newB, setNewB ] = useState(budget);
   
   useEffect(() => {
     loadBudget();
@@ -19,17 +21,12 @@ const Budget = () => {
       console.log(err.message);
     }
     };
-  
-    const eventHandler = (event: any) => {
-      setBudget(event.target.value)
-      updateBudget(budget);
-    }
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Exercise: Add add new expense to expenses context array
 
-    updateBudget(budget);
+    updateBudget(newB);
       setBudget(budget);
   };
 
@@ -38,7 +35,7 @@ const Budget = () => {
       <div style={{display: "flex"}}>
       Budget: $
         <form onSubmit={(event) => onSubmit(event)}>
-          <input value={budget} onChange={(event) => setBudget(Number(event.target.value))} />
+          <input value={newB} onChange={(event) => setNewB(Number(event.target.value))} />
           <button type="submit">
             Save
           </button>

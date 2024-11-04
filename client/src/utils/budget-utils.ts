@@ -21,6 +21,10 @@ export const fetchBudget = async (): Promise<number> => {
 export const updateBudget = async (budget: number): Promise<number> => {
     const response = await fetch(`${API_BASE_URL}/budget`, {
     	method: "PUT",
+        headers: {
+        	"Content-Type": "application/json",
+    	},
+        body: JSON.stringify( {newBudget: budget} ),
 	});
 	if (!response.ok) {
     	throw new Error("Failed to edit budget");
