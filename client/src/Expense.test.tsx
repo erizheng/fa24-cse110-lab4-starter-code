@@ -32,7 +32,7 @@ describe("Expense Create", () => {
         const exp2C = screen.getByText('$500');
         const exp3C = screen.getByText('$33');
 
-        expect(exp1).not.toBeInTheDocument,
+        expect(exp1).toBeInTheDocument,
         expect(exp2).toBeInTheDocument,
         expect(exp3).toBeInTheDocument,
         expect(exp1C).toBeInTheDocument,
