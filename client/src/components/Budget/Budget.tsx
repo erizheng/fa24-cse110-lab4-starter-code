@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../context/AppContext";
-import { fetchBudget } from "../../utils/budget-utils";
+import { fetchBudget, updateBudget } from "../../utils/budget-utils";
 
 
 const Budget = () => {
@@ -20,14 +20,29 @@ const Budget = () => {
     }
     };
   
+    const eventHandler = (event: any) => {
+      setBudget(event.target.value)
+      updateBudget(budget);
+    }
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // Exercise: Add add new expense to expenses context array
+
+    updateBudget(budget);
+      setBudget(budget);
+  };
 
   return (
     <div className="alert alert-secondary p-3 d-flex align-items-center justify-content-between">
       <div style={{display: "flex"}}>
       Budget: $
-        <div contentEditable="true">
-          {budget}
-        </div>
+        <form onSubmit={(event) => onSubmit(event)}>
+          <input value={budget} onChange={(event) => setBudget(Number(event.target.value))} />
+          <button type="submit">
+            Save
+          </button>
+        </form>
       </div>
     </div>
   );
