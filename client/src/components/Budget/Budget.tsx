@@ -17,6 +17,7 @@ const Budget = () => {
     try {
       const budgetB = await fetchBudget();
       setBudget(budgetB);
+      setNewB(budgetB);
     } catch (err: any) {
       console.log(err.message);
     }
@@ -27,7 +28,7 @@ const Budget = () => {
     // Exercise: Add add new expense to expenses context array
 
     updateBudget(newB);
-      setBudget(budget);
+      setBudget(newB);
   };
 
   return (
