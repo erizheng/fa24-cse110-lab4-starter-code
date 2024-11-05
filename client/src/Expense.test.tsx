@@ -1,7 +1,19 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import App from './App';
 
-describe("Expense Create", () => {
+test('has buttons', () => {
+    render(<App/>)
+    //get buttons and fields
+   
+    const nameBox = screen.getByTestId('ExpenseN');
+    const costBox = screen.getByTestId('ExpenseC');
+
+  
+    expect(nameBox).toBeInTheDocument(),
+    expect(costBox).toBeInTheDocument();
+});
+
+// describe("Expense Create", () => {
     
 //     test('Created Three Item in List', () => {
 //         render(<App />);
@@ -200,6 +212,6 @@ describe("Expense Create", () => {
 //         const r4 = parseFloat(remain.innerHTML.match(/(\d+)/)![0]);
 //         expect(s4+r4).toBe(parseFloat("1000"));
 //     });
-});
+// });
 
 
