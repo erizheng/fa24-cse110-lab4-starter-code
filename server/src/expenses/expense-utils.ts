@@ -23,6 +23,46 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
  
  }
 
+ export async function deleteExpense(req: Request, res: Response, db: Database) {
+
+    try {
+        // Type casting the request body to the expected format.
+        const { id, cost, description } = req.body as { id: string, cost: number, description: string };
+ 
+        if (!id) {
+            return res.status(400).send({ error: "Missing required fields" });
+        }
+ 
+        await db.run('DELETE FROM expenses WHERE id= ?;', id);
+        res.status(201).send({ id });
+ 
+    } catch (error) {
+ 
+        return res.status(400).send({ error: `Expense could not be deleted, + ${error}` });
+    };
+ 
+ }
+
+ export async function getExpenses(req: Request, res: Response, db: Database) {
+
+    try {
+        // Type casting the request body to the expected format.
+        const { id, cost, description } = req.body as { id: string, cost: number, description: string };
+ 
+        if (!description || !id || !cost) {
+            return res.status(400).send({ error: "Missing required fields" });
+        }
+ 
+        await db.all('SELECT * FROM expenses');//not sure if this is right
+        res.status(201).send({ id });
+ 
+    } catch (error) {
+ 
+        return res.status(400).send({ error: `Expense could not be retrieved, + ${error}` });
+    };
+ 
+ }
+
 // export function createExpenseServer(req: Request, res: Response, expenses: Expense[]) {
 //     const { id, cost, description } = req.body;
 
