@@ -27,13 +27,13 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
 
     try {
         // Type casting the request body to the expected format.
-        const { id, cost, description } = req.body as { id: string, cost: number, description: string };
+        const id = req.params.id;
  
         if (!id) {
             return res.status(400).send({ error: "Missing required fields" });
         }
  
-        await db.run('DELETE FROM expenses WHERE id= ?;', id);
+        await db.run('DELETE FROM expenses WHERE id=(?);', [id]);
         res.status(201).send({ id });
  
     } catch (error) {
@@ -46,15 +46,11 @@ export async function createExpenseServer(req: Request, res: Response, db: Datab
  export async function getExpenses(req: Request, res: Response, db: Database) {
 
     try {
-        // Type casting the request body to the expected format.
-        const { id, cost, description } = req.body as { id: string, cost: number, description: string };
- 
-        if (!description || !id || !cost) {
-            return res.status(400).send({ error: "Missing required fields" });
-        }
- 
-        await db.all('SELECT * FROM expenses');//not sure if this is right
-        res.status(201).send({ id });
+      
+        const data = await db.all('SELECT * FROM expenses');//not sure if this is right
+
+        res.send({"data": data});
+        
  
     } catch (error) {
  
